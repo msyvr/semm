@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}{% endblock %}</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="container">
+        <div class="login_welcome">
+            <a href="https://metamask.io" target="_blank"><img src="{{ url_for('static', filename='images/mm_fox.jpg') }}" alt="https://www.coindesk.com/learn/how-to-set-up-a-metamask-wallet/"></a>
+        </div>
+
+        {% block content %}{% endblock %}
+        {% block script %}{% endblock %}
+
+        <div class="siwe_info">
+            *SIWE conforms to <a href="https://eips.ethereum.org/EIPS/eip-4361" target="_blank">EIP 4361</a>
+            <br>
+            *Verification & authentication performed via <a href="https://eips.ethereum.org/EIPS/eip-191" target="_blank">EIP-191</a>
+        </div> 
+    </body>
+
+    <script>
+    </script>
+</html>

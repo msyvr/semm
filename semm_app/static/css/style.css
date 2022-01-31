@@ -1,0 +1,92 @@
+body {
+    background: black;
+    font-family: 'Inter';
+    font-size: medium;
+    color: #2fdfd3;
+    line-height: 150%;
+}
+body a:link {
+    text-decoration: none;
+    color: inherit;
+}
+body a:hover {
+    font-weight:bolder;
+    text-decoration: none;
+}
+body a:visited {
+    color: inherit;
+    font-weight: bold;
+}
+body a:active {
+    color: inherit;
+    text-decoration: none;
+}
+.container {
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Inter: 500px';
+    font-size: larger;
+}
+
+.login_welcome{
+    font-size: larger;
+}
+.login_access {
+    margin-top: 10px;
+    font-weight: lighter;
+    font-size: medium;
+}
+.login_info{
+    margin-top: 30px;
+    font-weight: lighter;
+    font-size: medium;
+}
+.info_title{
+    margin-top: 30px;
+    font-weight: lighter;
+    font-size: larger;
+}
+.ulist {
+    font-size: smaller;
+    text-align: left;
+}
+.button{
+    margin-top: 10px;
+    color: #2fdfd3;
+    background: rgb(8, 14, 14);
+    font-size: medium;
+    padding: 10px;
+    border-radius: 2%;
+    border-width: thin;
+}
+.button:hover {
+    font-weight:bolder;
+}
+.no_provider {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: white;
+    font-style: italic;
+    font-size: smaller;
+}
+.siwe_info {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: smaller;
+}
+.siwe_result {
+    margin-top: 30px;
+    display: flex;
+    max-width: 33vw;
+    font-size: larger; 
+}

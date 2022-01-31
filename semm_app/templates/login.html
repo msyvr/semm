@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+Sign In With Ethereum For MetaMask Users 
+{% endblock %}
+
+{% block content %}
+<div class="login_info">logged into <a href="https://metamask.io" target="_blank">MetaMask</a>?<br>foxy! now you can ...</div>
+<div class="login_access">
+    <button id="login_button" class="button" onclick="metamask_api_request();">Sign In With Ethereum*</button>
+    <div class="login_info"><a href="/info" target="_blank">curious about how it works?</a></div>
+</div> 
+{% endblock %}
+
+
+{% block script %}
+<script>
+    function metamask_api_request() {
+        if (!window.ethereum) {
+            alert('You need to log into MetaMask for SIWE to work.')
+            return
+        }
+        document.getElementById("login_button").disabled=true;  
+        ethereum.request({ 
+            method: 'eth_requestAccounts' 
+        })
+        .then((accounts) => {
+            const from = accounts[0];
+            console.log(from)
+            const msg = [{
+                "domain":"localhost",
+                "address": from,
+                "statement":"test app login using siwe",
+                "uri":"https://localhost",
+                "version":"1",
+                "nonce":"abc", // TODO use siwe.generate_nonce()
+                "issued_at":"2022-01-31T02:52:31.393Z","chain_id":"1",
+            }]
+            //const msg = `0x${Buffer.from(sign_request_message, 'utf8').toString('hex')}`;   
+            ethereum.request({
+                method: 'personal_sign',
+                params: [ msg, from ],
+            })
+            .then((signature) => {
+                console.log(signature)
+                options = { 
+                    method: "POST",
+                    body: JSON.stringify({
+                        "signature": signature,
+                        "message": msg
+                    }),
+                    headers: new Headers({
+                        "content-type": "application/json"
+                    })
+                }
+                fetch(`${window.origin}/siwe_restricted`, options)
+                .then((response) => {
+                    console.log('POSTED MM DATA AND GOT RESPONSE')
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                })
+            })
+        })
+        .catch((error) => {
+            if (error.code === 4001) {
+                // EIP-1193 userRejectedRequest error
+                console.log('Signature needed to continue.');
+            } else {
+                console.error(error);
+            }
+        });
+    }
+</script>
+{% endblock %}

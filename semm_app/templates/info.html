@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    How SIWE Works
+{% endblock %}
+
+{% block content %} 
+
+
+    <div class="info_title"><a href="https://login.xyz" target="_blank">Sign In With Ethereum</a> - how it works:</div>
+    <ul class="ulist">
+        <li>Clicking the button triggers a request to <a href="https://metamask.io" target="_blank">MetaMask</a>.</li>
+        <li>MetaMask checks the request and passes it to you.</li>
+        <li>You click to accept.</li>
+        <li>Your wallet credentials are passed to <a href="https://login.xyz/" target="_blank">SIWE</a>.</li>
+        <li>Your digital identity is verified* for login.</li> 
+    </ul>
+    <!--TODO update the link-->
+    <div class="login_access">
+        <a href="../">Try it out!</a>
+    </div>
+
+    
+{% endblock %}
