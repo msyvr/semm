@@ -56,13 +56,13 @@ True
 
 ## TODO
 ### get siwe to work! 
-- next steps: check arg formats vs spec expectations
+- next steps: check args vs spec expectations vis a vis .validate() method
 
 ### tests
 - the test are patchy: biased effort toward getting .validate() to work but was uncertain about tests that might help, wasn't clear on how TDD might help resolve
 
-### set up user/session management for setting up routes with @login_required
+### set up user/session management for setting up login-restricted routes (eg @login_required decorator)
 - the restricted page can currently be accessed by entering that URL directly: unacceptable in production; for now, the app itself doesn't render that template unless the siwe credential verification is successful
 
-### message for MetaMask signature
+### message for MetaMask signature RESOLVED
 - let user know what they're signing (currently blank - didn't troubleshoot this, but it's important for UX and transparency generally)
