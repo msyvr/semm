@@ -19,21 +19,33 @@
     - SiweMessage.validate(sig) complains if the message keys of the original message aren't formatted as (all lower case) + (name words separated by underscore _)
 
 ## Current 'got stuck' point
+```
+...verify.py", line 20, in verify_credentials
 
-`...verify.py", line 20, in verify_credentials
 validation_outcome = siwe_message.validate(sig)
+
 File "/Users/mspisar/.pyenv/versions/3.9.7/lib/python3.9/site-packages/siwe/siwe.py", line 209, in validate
+
 raise InvalidSignature
-siwe.siwe.InvalidSignature`
+
+siwe.siwe.InvalidSignature
+```
 
 - siwe.py line 209 corresponds to:
-`if address != self.address:
-raise InvalidSignature`
+```
+if address != self.address:
 
-- so, let's comment out the .validate method and check the value of siwe_message['address'] that would be passed to that validation and compare with the original message dict value for 'address' (caveat: I'm expecting that the values from the original message and SiweMessage-generated message are being evaluated but, based on what I've seen in the codebase so far, I'm not 100% sure that's how siwe works, so this may not be the appropriate vector for troubleshooting this issue):
+raise InvalidSignature
+```
 
-`print(siwe_message.address == msg[0]['address'])
-True`
+- so, let's comment out the .validate method and check the value of siwe_message['address'] that would be passed to that validation and compare with the original message dict value for 'address'
+    -  (caveat: expecting the values from the original message and SiweMessage-generated message should match but, based on what I've seen in the codebase so far, I'm not 100% sure that's how siwe works, and the following may not be the appropriate vector for troubleshooting this issue):
+
+```
+print(siwe_message.address == msg[0]['address'])
+
+True
+```
 
 - hmmm, this is going to take some more digging
 - ... I stopped troubleshooting at this point (probably makes sense to confer with someone working on siwe-py)
