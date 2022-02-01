@@ -1,2 +1,4 @@
-# ignore venv config file
+# /semm/semm_app/.gitignore
+# Ignore .venv local config file.
+
 pyvenv.cfg

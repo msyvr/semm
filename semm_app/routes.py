@@ -1,3 +1,5 @@
+# /semm/semm_app/routes.py
+
 """ Application routes """
 
 from flask import render_template, request, url_for, make_response, redirect, jsonify, make_response
@@ -21,9 +23,7 @@ def siwe_restricted():
         req = request.get_json()
         signature = req['signature']
         message = req['message']
-        print(type(req))
-        print(req)
-        print('RECEIVED POSTED DATA')
+        print('RECEIVED POSTED METAMASK DATA')
         # res = make_response(jsonify({"message":"MetaMask data received"}), 200)
         credentials_verified = verify_credentials(message, signature)
         if credentials_verified == True:
@@ -31,7 +31,7 @@ def siwe_restricted():
         else:
             return redirect(url_for('credentials_not_verified'))
     else:
-        # TODO prevent unauthorized access: refactor with @login_required (import flask-login, set up sessions, track user login status, alter nonce for signature);
+        # TODO prevent unauthorized access: refactor with @login_required, sessions, etc.;
         return render_template('siwe_restricted.html')
 
 @app.route('/credentials_not_verified')

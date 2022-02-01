@@ -1,3 +1,5 @@
+<!-- /semm/semm_app/templates/login.html -->
+
 {% extends "layout.html" %}
 
 {% block title %} 
@@ -35,8 +37,7 @@ Sign In With Ethereum For MetaMask Users
                 "version":"1",
                 "nonce":"abc", // TODO use siwe.generate_nonce()
                 "issued_at":"2022-01-31T02:52:31.393Z","chain_id":"1",
-            }]
-            //const msg = `0x${Buffer.from(sign_request_message, 'utf8').toString('hex')}`;   
+            }]  
             ethereum.request({
                 method: 'personal_sign',
                 params: [ msg, from ],
