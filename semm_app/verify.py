@@ -2,6 +2,7 @@
 
 """ Verify credentials with SIWE """
 
+import json
 import siwe
 from siwe.siwe import SiweMessage
 
@@ -12,8 +13,9 @@ def verify_credentials(msg, sig):
   NOTE BROKEN: not working :( "Invalid signature"
   """
   
-  msg[0]['signature'] = sig
-  siwe_message = SiweMessage(msg[0])
+  msg_dict = json.loads(msg)
+  msg_dict['signature'] = sig
+  siwe_message = SiweMessage(msg_dict)
   try:
     validation_outcome = siwe_message.validate(sig)
   # except siwe.ValidationError: # no ValidationError attribute

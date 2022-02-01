@@ -29,18 +29,21 @@ Sign In With Ethereum For MetaMask Users
         .then((accounts) => {
             const from = accounts[0];
             console.log(from)
-            const msg = [{
+            var current_time = new Date();
+            const msg = {
                 "domain":"localhost",
                 "address": from,
                 "statement":"test app login using siwe",
                 "uri":"https://localhost",
                 "version":"1",
                 "nonce":"abc", // TODO use siwe.generate_nonce()
-                "issued_at":"2022-01-31T02:52:31.393Z","chain_id":"1",
-            }]  
+                "issued_at": current_time.toISOString(),
+                "chain_id":"1",
+            }
+            const msg_str = JSON.stringify(msg);  
             ethereum.request({
                 method: 'personal_sign',
-                params: [ msg, from ],
+                params: [ msg_str, from ],
             })
             .then((signature) => {
                 console.log(signature)
@@ -48,7 +51,7 @@ Sign In With Ethereum For MetaMask Users
                     method: "POST",
                     body: JSON.stringify({
                         "signature": signature,
-                        "message": msg
+                        "message": msg_str
                     }),
                     headers: new Headers({
                         "content-type": "application/json"

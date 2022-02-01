@@ -18,8 +18,8 @@
     - ? check message parsing in siwe.py
 
 ## Observations:
-- helpful for user to know upfront that the MetaMask message for personal sign can't be a dict
-    - here, that's handled by enclosing dict in an array then extracting message[0] to get back the dict message
+- helpful for user to know upfront that the MetaMask message for personal sign can't be key-values pairs object
+    - JSON.stringify(message)
 - unexpected behaviours(?):
     - instantiating a SiweMessage message fails without a message argument that includes a 'signature' field (this may not be unexpected but seemed somehow unintuitive?)
     - SiweMessage.validate(sig) complains if the message keys of the original message aren't formatted as (all lower case) + (name words separated by underscore _)
@@ -44,11 +44,11 @@ if address != self.address:
 raise InvalidSignature
 ```
 
-- so, let's comment out the .validate method and check the value of siwe_message['address'] that would be passed to that validation and compare with the original message dict value for 'address'
-    -  (caveat: expecting the values from the original message and SiweMessage-generated message should match but, based on what I've seen in the codebase so far, I'm not 100% sure that's how siwe works, and the following may not be the appropriate vector for troubleshooting this issue):
+- so, let's comment out the .validate method and check the value of siwe_message['address'] that would be passed to that validation and compare with the signed message value for 'address'
+    -  (caveat: I'm not 100% sure that check is meaningful, and the following may not be the appropriate vector for troubleshooting this issue):
 
 ```
-print(siwe_message.address == msg[0]['address'])
+print(msg_dict['address'] == siwe_message.address)
 
 True
 ```
