@@ -11,11 +11,9 @@
 - instantiate SiweMessage with arg = message (from MetaMask sig request)
 - redirect for unverified credentials (no 'login')
 - info page (basics of how siwe works)
-- logged-in page (only if accessed directly by URL; the app doesn't redirect there as siwe isn't validating the metamask data)
 
 ## Not working:
 - message validation by siwe :(
-    - ? check message parsing in siwe.py
 
 ## Observations:
 - helpful for user to know upfront that the MetaMask message for personal sign can't be key-values pairs object
