@@ -1,5 +1,8 @@
 # Demo: Flask app with Sign In With Ethereum for MetaMask users
 
+## Use
+- instructions in deploy.sh
+
 ## Working:
 - login landing page
 - MetaMask personal sign request
