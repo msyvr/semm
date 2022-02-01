@@ -17,7 +17,7 @@ def verify_credentials(msg, sig):
   msg_dict['signature'] = sig
   siwe_message = SiweMessage(msg_dict)
   try:
-    validation_outcome = siwe_message.validate(sig)
+    validation_outcome = siwe_message.validate()
   # except siwe.ValidationError: # no ValidationError attribute
   #   print('siwe validation error')
   except:
