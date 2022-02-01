@@ -5,18 +5,21 @@
 
 ## Working:
 - login landing page
-- MetaMask personal sign request
+- retrieve user eth address
+- build EIP-4316 conforming message for user signature
+- generate MetaMask personal sign request
+- instantiate SiweMessage with arg = message (from MetaMask sig request)
 - redirect for unverified credentials (no 'login')
 - info page (basics of how siwe works)
-- login page (only if accessed directly by URL; the app doesn't redirect there as siwe isn't validating the metamask data)
+- logged-in page (only if accessed directly by URL; the app doesn't redirect there as siwe isn't validating the metamask data)
 
 ## Not working:
 - message validation by siwe :(
-- ? check message parsing in siwe.py
+    - ? check message parsing in siwe.py
 
 ## Observations:
 - helpful for user to know upfront that the MetaMask message for personal sign can't be a dict
-    - here, that's handled by enclosing dict in an array then extracting array[0] to get back the dict message
+    - here, that's handled by enclosing dict in an array then extracting message[0] to get back the dict message
 - unexpected behaviours(?):
     - instantiating a SiweMessage message fails without a message argument that includes a 'signature' field (this may not be unexpected but seemed somehow unintuitive?)
     - SiweMessage.validate(sig) complains if the message keys of the original message aren't formatted as (all lower case) + (name words separated by underscore _)
