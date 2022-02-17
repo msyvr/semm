@@ -20,9 +20,9 @@ def login():
 def siwe_restricted():
     """ Validate MetaMask credentials and determine login status """
     if request.method == "POST":
-        req = request.get_json()
-        signature = req['signature']
-        message = req['message']
+        req = request.get_json() # type: dict
+        signature = req['signature'] # type: string
+        message = req['message'] # type: string
         print('RECEIVED POSTED METAMASK DATA')
         # res = make_response(jsonify({"message":"MetaMask data received"}), 200)
         credentials_verified = verify_credentials(message, signature)

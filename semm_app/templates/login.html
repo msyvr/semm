@@ -30,20 +30,18 @@ Sign In With Ethereum For MetaMask Users
             const from = accounts[0];
             console.log(from)
             var current_time = new Date();
-            const msg = {
-                "domain":"localhost",
-                "address": from,
-                "statement":"test app login using siwe",
-                "uri":"https://localhost",
-                "version":"1",
-                "nonce":"abc", // TODO use siwe.generate_nonce()
-                "issued_at": current_time.toISOString(),
-                "chain_id":"1",
-            }
-            const msg_str = JSON.stringify(msg);  
+            const msg = `${window.location.host} wants you to sign in with your Ethereum account:
+                ${from}\n
+                Testing Sign In With Ethereum\n
+                URI: ${window.location.host}
+                Version: 1
+                Chain ID: 1
+                Nonce: notAGoodNonce
+                Issued At: ${current_time.toISOString()}`
+            console.log(msg)
             ethereum.request({
                 method: 'personal_sign',
-                params: [ msg_str, from ],
+                params: [ msg, from ],
             })
             .then((signature) => {
                 console.log(signature)
@@ -51,7 +49,7 @@ Sign In With Ethereum For MetaMask Users
                     method: "POST",
                     body: JSON.stringify({
                         "signature": signature,
-                        "message": msg_str
+                        "message": msg
                     }),
                     headers: new Headers({
                         "content-type": "application/json"
