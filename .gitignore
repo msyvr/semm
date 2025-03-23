@@ -1,4 +1,13 @@
 # /semm/semm_app/.gitignore
-# Ignore .venv local config file.
 
+# Ignore .venv local config file.
 pyvenv.cfg
+
+# Ignore IDE files
+.vscode/
+
+# Ignore local python versioning/environment
+.venv/
+
+# Ignore local caching
+__pycache__/
